@@ -9,7 +9,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3002/api/register', { email, password });
+      const response = await axios.post('http://backend:3002/api/register', { email, password });
       alert(response.data.message);
     } catch (error) {
       alert(error.response?.data?.message || 'An error occurred during registration');

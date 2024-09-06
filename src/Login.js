@@ -9,7 +9,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3002/api/login', { email, password });
+      const response = await axios.post('http://backend:3002/api/login', { email, password });
       alert(response.data.message);
     } catch (error) {
       alert(error.response?.data?.message || 'An error occurred during login');
