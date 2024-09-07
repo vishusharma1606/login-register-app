@@ -1,37 +1,22 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from './Login';
-import Register from './Register';
-import Home from './Home'; // Import the Home component
+import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import Home from './Home'; // Import Home component
+import Login from './Login'; // Import Login component
+import Register from './Register'; // Import Register component
+import Dashboard from './Dashboard'; // Import Dashboard component
 
-const App = () => {
+function App() {
   return (
-    <Router>
-      <div>
-        {/* Navigation Links */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Route Setup */}
-        <Routes>
-          <Route path="/" element={<Home />} />           {/* Home Page */}
-          <Route path="/login" element={<Login />} />     {/* Login Page */}
-          <Route path="/register" element={<Register />} /> {/* Register Page */}
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} /> {/* Home page route */}
+        <Route path="/login" element={<Login />} /> {/* Login route */}
+        <Route path="/register" element={<Register />} /> {/* Register route */}
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Dashboard route */}
+      </Routes>
+    </div>
   );
-};
+}
 
 export default App;

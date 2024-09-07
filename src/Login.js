@@ -1,40 +1,60 @@
+// src/Login.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import the CSS file
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Example POST request to backend API for login
     try {
-      const response = await axios.post('http://localhost:3002/api/login', { email, password });
-      alert(response.data.message);
+      const response = await fetch('http://localhost:3002/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert('Login successful');
+        navigate('/dashboard'); // Redirect to the Dashboard page upon successful login
+      } else {
+        alert(data.message || 'Login failed');
+      }
     } catch (error) {
-      alert(error.response?.data?.message || 'An error occurred during login');
+      console.error('Login error:', error);
+      alert('An error occurred during login');
     }
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleLogin}>
         <h2>Login</h2>
         <input
           type="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          className="login-input"
           required
         />
         <input
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          className="login-input"
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </div>
   );
